@@ -16,7 +16,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=rest_clean
+      - POSTGRES_DB=nest_clean
       - TZ=UTC
       - PGTZ=UTC
     ports:
