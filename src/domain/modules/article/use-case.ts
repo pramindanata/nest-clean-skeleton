@@ -1,8 +1,9 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ArticleRepositoryContract } from '@/domain/contracts';
 import { BasePaginateProps, Paginator, RepositoryDIToken } from '../shared';
 import { Article } from './entity';
 
+@Injectable()
 export class ArticleUseCase {
   constructor(
     @Inject(RepositoryDIToken.ArticleRepositoryContract)

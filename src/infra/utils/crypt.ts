@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
+import { Injectable } from '@nestjs/common';
 import { CryptUtilContract } from '@/domain';
 
+@Injectable()
 export class CryptUtil implements CryptUtilContract {
   async hash(text: string): Promise<string> {
     const maxSalt = 10;
