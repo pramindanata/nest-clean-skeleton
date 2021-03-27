@@ -12,7 +12,9 @@
     "paths": {
       "@/*": ["./src/*"],
     },
-    "incremental": true
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
   },
   "exclude": ["node_modules", "dist"],
 }
