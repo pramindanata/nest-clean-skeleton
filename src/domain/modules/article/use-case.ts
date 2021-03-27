@@ -1,9 +1,13 @@
+import { Inject } from '@nestjs/common';
 import { ArticleRepositoryContract } from '@/domain/contracts';
-import { BasePaginateProps, Paginator } from '../shared';
+import { BasePaginateProps, Paginator, RepositoryDIToken } from '../shared';
 import { Article } from './entity';
 
 export class ArticleUseCase {
-  constructor(private articleRepo: ArticleRepositoryContract) {}
+  constructor(
+    @Inject(RepositoryDIToken.ArticleRepositoryContract)
+    private articleRepo: ArticleRepositoryContract,
+  ) {}
 
   async paginate(props: PaginateArticleProps): Promise<Paginator<Article>> {
     const paginator = await this.articleRepo.paginate(props);

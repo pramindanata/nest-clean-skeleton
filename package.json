@@ -1,5 +1,5 @@
 {
-  "name": "nest-clean-architecture",
+  "name": "nest-semi-clean-architecture",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -21,12 +21,24 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@casl/ability": "^5.2.2",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/module-alias": "^2.0.0",
+    "@types/redis": "^2.8.28",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
+    "pg": "^8.5.1",
+    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "typeorm": "^0.2.31"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

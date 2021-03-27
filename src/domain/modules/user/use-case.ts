@@ -1,13 +1,18 @@
+import { Inject } from '@nestjs/common';
 import { CryptUtilContract, UserRepositoryContract } from '../../contracts';
+import { RepositoryDIToken, UtilDIToken } from '../shared';
 import { User, UserRole } from './entity';
 import {
   EmailTakenException,
   InvalidCredentialGivenException,
 } from './exception';
 
-export class AuthUseCase {
+export class UserUseCase {
   constructor(
+    @Inject(RepositoryDIToken.UserRepositoryContract)
     private userRepo: UserRepositoryContract,
+
+    @Inject(UtilDIToken.CryptUtilContract)
     private cryptUtil: CryptUtilContract,
   ) {}
 
