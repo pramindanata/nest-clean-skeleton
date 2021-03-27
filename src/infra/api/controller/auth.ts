@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { Body, Controller, Inject, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, Inject, Post, Res } from '@nestjs/common';
 import { JWTUtilContract, UserUseCase, UtilDIToken } from '@/domain';
 import { CookieName } from '../constant';
 
@@ -13,6 +13,7 @@ export class AuthController {
   ) {}
 
   @Post('/login')
+  @HttpCode(200)
   async login(@Body() body: LoginBody, @Res() res: Response): Promise<any> {
     const user = await this.userUseCase.login(body);
     const token = await this.jwtUtil.create({
@@ -25,6 +26,7 @@ export class AuthController {
   }
 
   @Post('/register')
+  @HttpCode(200)
   async register(
     @Body() body: RegisterBody,
     @Res() res: Response,

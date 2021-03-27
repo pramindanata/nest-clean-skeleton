@@ -3,8 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ArticleModule, UserModule } from '@/domain';
 import { createConfig } from '@/core/config';
-import { UtilModule } from '../utils';
-import { RepositoryModule } from '../di';
+import { RepositoryModule, UtilModule } from '../di';
 import { AuthController } from './controller';
 
 @Module({
