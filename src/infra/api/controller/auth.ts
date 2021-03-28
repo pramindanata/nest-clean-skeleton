@@ -2,15 +2,20 @@ import { Response } from 'express';
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Inject,
   Post,
   Res,
-  UseGuards,
 } from '@nestjs/common';
-import { JWTUtilContract, UserUseCase, UtilDIToken } from '@/domain';
+import {
+  JWTUtilContract,
+  User as DomainUser,
+  UserUseCase,
+  UtilDIToken,
+} from '@/domain';
 import { CookieName } from '../constant';
-import { ValidSchema } from '../decorators';
+import { User, ValidSchema } from '../decorators';
 import { LoginBodySchema, RegisterBodySchema } from '../schemas';
 
 @Controller()
@@ -51,6 +56,13 @@ export class AuthController {
     return res.cookie(CookieName.TOKEN, token, { httpOnly: true }).json({
       message: 'OK',
     });
+  }
+
+  @Get('/me')
+  async me(@User() user: DomainUser): Promise<any> {
+    return {
+      data: user,
+    };
   }
 }
 

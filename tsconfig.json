@@ -15,6 +15,9 @@
     "incremental": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "typeRoots": [
+      "./src/types"
+    ]
   },
   "exclude": ["node_modules", "dist"],
 }
