@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './infra/api';
+import { AppModule, AllExceptionFilter } from './infra/api';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new AllExceptionFilter());
+
   await app.listen(3000);
 }
 
