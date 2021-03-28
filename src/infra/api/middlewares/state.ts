@@ -22,8 +22,6 @@ export class State implements NestMiddleware {
     const { cookies } = req;
     const user = await this.authenticate(cookies);
 
-    console.log(user);
-
     req.state = {
       user,
     };

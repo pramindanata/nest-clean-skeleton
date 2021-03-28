@@ -18,6 +18,7 @@ import {
   GetArticleListQuerySchema,
   UpdateArticleBodySchema,
 } from '../schemas';
+import { ParseStrIntPipe } from '../pipes';
 
 @Controller('/articles')
 export class ArticleController {
@@ -58,7 +59,7 @@ export class ArticleController {
   }
 
   @Get('/:id')
-  async show(@Param('id') id: string): Promise<any> {
+  async show(@Param('id', ParseStrIntPipe) id: string): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
     if (!article) {
@@ -73,7 +74,7 @@ export class ArticleController {
   @ValidSchema({ body: UpdateArticleBodySchema })
   async update(
     @Body() body: UpdateBody,
-    @Param('id') id: string,
+    @Param('id', ParseStrIntPipe) id: string,
   ): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
@@ -88,7 +89,7 @@ export class ArticleController {
 
   @Delete('/:id')
   @Auth()
-  async delete(@Param('id') id: string): Promise<any> {
+  async delete(@Param('id', ParseStrIntPipe) id: string): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
     if (!article) {
