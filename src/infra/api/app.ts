@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserDomainModule } from '@/domain';
+import { SharedDomainModule, UserDomainModule } from '@/domain';
 import { createConfig } from '@/core/config';
 import { RepositoryModule, UtilModule } from '../di';
 import { ArticleAPIModule, AuthAPIModule, StateBuilder } from './modules';
@@ -28,6 +28,7 @@ import { ArticleAPIModule, AuthAPIModule, StateBuilder } from './modules';
      * Domain
      * StateBuilder need UserDomainModule
      */
+    SharedDomainModule,
     UserDomainModule,
 
     /**

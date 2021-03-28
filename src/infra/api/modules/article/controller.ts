@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   HttpCode,
   HttpStatus,
@@ -11,15 +12,21 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ArticleUseCase, Paginator, User as UserEntity } from '@/domain';
+import {
+  AppAbility,
+  Article,
+  ArticleUseCase,
+  Paginator,
+  User as UserEntity,
+} from '@/domain';
 import { ArticleCatalogDTO, ArticleDTO } from '@/infra/dto';
-import { ParseStrIntPipe, ValidSchema } from '../shared';
+import { Auth, User } from '../auth';
+import { Ability, ParseStrIntPipe, ValidSchema } from '../shared';
 import {
   CreateArticleSchema,
   GetArticlesSchema,
   UpdateArticleSchema,
 } from './schema';
-import { Auth, User } from '../auth';
 
 @Controller('/articles')
 export class ArticleController {
@@ -27,7 +34,14 @@ export class ArticleController {
 
   @Get('/')
   @ValidSchema({ query: GetArticlesSchema })
-  async index(@Query() query: IndexQuery): Promise<Paginator<any>> {
+  async index(
+    @Query() query: IndexQuery,
+    @Ability() ability: AppAbility,
+  ): Promise<Paginator<any>> {
+    if (ability.can('readAny', Article)) {
+      throw new ForbiddenException();
+    }
+
     const { order, page, search, sort } = query;
     const paginator = await this.articleUseCase.paginate({
       search,
@@ -50,9 +64,13 @@ export class ArticleController {
   async create(
     @Body() body: CreateBody,
     @User() user: UserEntity,
+    @Ability() ability: AppAbility,
   ): Promise<any> {
-    const { description, title } = body;
+    if (ability.cannot('create', Article)) {
+      throw new ForbiddenException();
+    }
 
+    const { description, title } = body;
     const article = await this.articleUseCase.create({
       title,
       description,
@@ -65,11 +83,18 @@ export class ArticleController {
   }
 
   @Get('/:id')
-  async show(@Param('id', ParseStrIntPipe) id: string): Promise<any> {
+  async show(
+    @Param('id', ParseStrIntPipe) id: string,
+    @Ability() ability: AppAbility,
+  ): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
     if (!article) {
       throw new NotFoundException();
+    }
+
+    if (ability.cannot('read', article)) {
+      throw new ForbiddenException();
     }
 
     return {
@@ -83,11 +108,16 @@ export class ArticleController {
   async update(
     @Body() body: UpdateBody,
     @Param('id', ParseStrIntPipe) id: string,
+    @Ability() ability: AppAbility,
   ): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
     if (!article) {
       throw new NotFoundException();
+    }
+
+    if (ability.cannot('update', article)) {
+      throw new ForbiddenException();
     }
 
     const updatedArticle = await this.articleUseCase.update(article, body);
@@ -99,11 +129,18 @@ export class ArticleController {
 
   @Delete('/:id')
   @Auth()
-  async delete(@Param('id', ParseStrIntPipe) id: string): Promise<any> {
+  async delete(
+    @Param('id', ParseStrIntPipe) id: string,
+    @Ability() ability: AppAbility,
+  ): Promise<any> {
     const article = await this.articleUseCase.getDetail(id);
 
     if (!article) {
       throw new NotFoundException();
+    }
+
+    if (ability.cannot('delete', article)) {
+      throw new ForbiddenException();
     }
 
     await this.articleUseCase.delete(article);

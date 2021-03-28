@@ -5,14 +5,21 @@ import {
   NestMiddleware,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JWTUtilContract, User, UserUseCase, UtilDIToken } from '@/domain';
-import { CookieName } from '../constant';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import {
+  AbilityFactory,
+  JWTUtilContract,
+  User,
+  UserUseCase,
+  UtilDIToken,
+} from '@/domain';
+import { CookieName } from '../constant';
 
 @Injectable()
 export class StateBuilder implements NestMiddleware {
   constructor(
     private userUseCase: UserUseCase,
+    private abilityFactory: AbilityFactory,
 
     @Inject(UtilDIToken.JWTUtilContract)
     private jwtUtil: JWTUtilContract,
@@ -24,6 +31,7 @@ export class StateBuilder implements NestMiddleware {
 
     req.state = {
       user,
+      ability: this.abilityFactory.createForUser(user),
     };
 
     next();
