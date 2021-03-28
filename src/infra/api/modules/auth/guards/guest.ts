@@ -1,8 +1,8 @@
 import {
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -13,7 +13,7 @@ export class GuestGuard implements CanActivate {
     const { user } = req.state;
 
     if (user) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return true;

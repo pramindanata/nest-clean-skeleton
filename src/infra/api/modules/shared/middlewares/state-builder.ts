@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import {
+  HttpStatus,
   Inject,
   Injectable,
   NestMiddleware,
@@ -50,7 +51,11 @@ export class StateBuilder implements NestMiddleware {
       return user;
     } catch (err) {
       if (err instanceof JsonWebTokenError) {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException({
+          statusCode: HttpStatus.UNAUTHORIZED,
+          error: 'JWTException',
+          message: err.message,
+        });
       }
 
       throw err;

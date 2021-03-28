@@ -38,7 +38,7 @@ export class ArticleController {
     @Query() query: IndexQuery,
     @Ability() ability: AppAbility,
   ): Promise<Paginator<any>> {
-    if (ability.can('readAny', Article)) {
+    if (ability.cannot('readAny', Article)) {
       throw new ForbiddenException();
     }
 
