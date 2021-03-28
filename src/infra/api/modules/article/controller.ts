@@ -12,6 +12,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ArticleUseCase, Paginator, User as UserEntity } from '@/domain';
+import { ArticleCatalogDTO, ArticleDTO } from '@/infra/dto';
 import { ParseStrIntPipe, ValidSchema } from '../shared';
 import {
   CreateArticleSchema,
@@ -36,7 +37,10 @@ export class ArticleController {
       perPage: 8,
     });
 
-    return paginator;
+    return {
+      ...paginator,
+      data: paginator.data.map(ArticleCatalogDTO.fromDomain),
+    };
   }
 
   @Post('/')
@@ -55,7 +59,9 @@ export class ArticleController {
       author: user!,
     });
 
-    return article;
+    return {
+      data: ArticleDTO.fromDomain(article),
+    };
   }
 
   @Get('/:id')
@@ -66,7 +72,9 @@ export class ArticleController {
       throw new NotFoundException();
     }
 
-    return article;
+    return {
+      data: ArticleDTO.fromDomain(article),
+    };
   }
 
   @Put('/:id')
@@ -84,7 +92,9 @@ export class ArticleController {
 
     const updatedArticle = await this.articleUseCase.update(article, body);
 
-    return updatedArticle;
+    return {
+      data: ArticleDTO.fromDomain(updatedArticle),
+    };
   }
 
   @Delete('/:id')
@@ -98,7 +108,9 @@ export class ArticleController {
 
     await this.articleUseCase.delete(article);
 
-    return article;
+    return {
+      data: ArticleDTO.fromDomain(article),
+    };
   }
 }
 

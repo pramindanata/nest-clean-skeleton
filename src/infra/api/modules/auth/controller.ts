@@ -17,6 +17,7 @@ import {
 import { CookieName, ValidSchema } from '../shared';
 import { LoginSchema, RegisterSchema } from './schema';
 import { Auth, Guest, User } from './decorators';
+import { UserDTO } from '@/infra/dto';
 
 @Controller()
 export class AuthController {
@@ -64,7 +65,7 @@ export class AuthController {
   @Auth()
   async me(@User() user: UserEntity): Promise<any> {
     return {
-      data: user,
+      data: UserDTO.fromDomain(user),
     };
   }
 }
