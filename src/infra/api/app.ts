@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ArticleModule, UserModule } from '@/domain';
 import { createConfig } from '@/core/config';
 import { RepositoryModule, UtilModule } from '../di';
-import { AuthController } from './controller';
+import { ArticleController, AuthController } from './controller';
 import { State } from './middlewares';
 
 @Module({
@@ -31,7 +31,7 @@ import { State } from './middlewares';
     UserModule,
     ArticleModule,
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, ArticleController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

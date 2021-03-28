@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import {
   JWTUtilContract,
-  User as DomainUser,
+  User as UserEntity,
   UserUseCase,
   UtilDIToken,
 } from '@/domain';
@@ -62,7 +62,7 @@ export class AuthController {
 
   @Get('/me')
   @Auth()
-  async me(@User() user: DomainUser): Promise<any> {
+  async me(@User() user: UserEntity): Promise<any> {
     return {
       data: user,
     };
