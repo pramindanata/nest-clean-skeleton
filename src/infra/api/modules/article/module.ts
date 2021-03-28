@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ArticleModule } from '@/domain';
+import { ArticleDomainModule } from '@/domain';
 import { ArticleController } from './controller';
 
 @Module({
-  imports: [ArticleModule],
+  imports: [ArticleDomainModule],
   controllers: [ArticleController],
 })
 export class ArticleAPIModule {}

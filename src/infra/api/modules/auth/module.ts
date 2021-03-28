@@ -1,9 +1,9 @@
-import { UserModule } from '@/domain';
+import { UserDomainModule } from '@/domain';
 import { Module } from '@nestjs/common';
 import { AuthController } from './controller';
 
 @Module({
-  imports: [UserModule],
+  imports: [UserDomainModule],
   controllers: [AuthController],
 })
 export class AuthAPIModule {}

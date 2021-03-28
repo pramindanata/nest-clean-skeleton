@@ -5,4 +5,4 @@ import { ArticleUseCase } from './use-case';
   providers: [ArticleUseCase],
   exports: [ArticleUseCase],
 })
-export class ArticleModule {}
+export class ArticleDomainModule {}

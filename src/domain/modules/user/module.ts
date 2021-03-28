@@ -5,4 +5,4 @@ import { UserUseCase } from './use-case';
   providers: [UserUseCase],
   exports: [UserUseCase],
 })
-export class UserModule {}
+export class UserDomainModule {}
