@@ -1,2 +1,2 @@
 export * from './app';
-export * from './modules/shared';
+export * from './modules';
