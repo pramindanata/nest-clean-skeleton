@@ -10,7 +10,7 @@ import { CookieName } from '../constant';
 import { JsonWebTokenError } from 'jsonwebtoken';
 
 @Injectable()
-export class State implements NestMiddleware {
+export class StateBuilder implements NestMiddleware {
   constructor(
     private userUseCase: UserUseCase,
 

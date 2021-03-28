@@ -1,16 +1,21 @@
 import Joi from 'joi';
 import { ExecutionContext, Injectable } from '@nestjs/common';
-import { RequestPayloadSchema } from '../../interface';
+import { RequestPayloadSchema } from '../../shared';
 
 @Injectable()
-export class CreateArticleBodySchema implements RequestPayloadSchema {
+export class RegisterBodySchema implements RequestPayloadSchema {
   async get(ctx: ExecutionContext, joi: Joi.Root): Promise<Joi.ObjectSchema> {
     return joi.object({
-      title: joi
+      email: joi
         .string()
+        .email()
         .required()
         .trim(),
-      description: joi
+      password: joi
+        .string()
+        .required()
+        .min(8),
+      name: joi
         .string()
         .required()
         .trim(),

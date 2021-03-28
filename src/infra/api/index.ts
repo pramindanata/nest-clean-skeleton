@@ -1,2 +1,2 @@
 export * from './app';
-export * from './exception-filter';
+export * from './modules/shared';

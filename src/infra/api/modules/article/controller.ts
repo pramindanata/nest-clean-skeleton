@@ -12,13 +12,13 @@ import {
   Query,
 } from '@nestjs/common';
 import { ArticleUseCase, Paginator, User as UserEntity } from '@/domain';
-import { Auth, User, ValidSchema } from '../decorators';
+import { ParseStrIntPipe, ValidSchema } from '../shared';
 import {
   CreateArticleBodySchema,
   GetArticleListQuerySchema,
   UpdateArticleBodySchema,
-} from '../schemas';
-import { ParseStrIntPipe } from '../pipes';
+} from './schema';
+import { Auth, User } from '../auth';
 
 @Controller('/articles')
 export class ArticleController {

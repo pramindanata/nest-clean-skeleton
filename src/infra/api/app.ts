@@ -9,8 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ArticleModule, UserModule } from '@/domain';
 import { createConfig } from '@/core/config';
 import { RepositoryModule, UtilModule } from '../di';
-import { ArticleController, AuthController } from './controller';
-import { State } from './middlewares';
+import { ArticleAPIModule, AuthAPIModule, StateBuilder } from './modules';
 
 @Module({
   imports: [
@@ -30,11 +29,18 @@ import { State } from './middlewares';
      */
     UserModule,
     ArticleModule,
+
+    /**
+     * API
+     */
+    AuthAPIModule,
+    ArticleAPIModule,
   ],
-  controllers: [AuthController, ArticleController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(State).forRoutes({ path: '*', method: RequestMethod.ALL });
+    consumer
+      .apply(StateBuilder)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

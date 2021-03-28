@@ -14,9 +14,9 @@ import {
   UserUseCase,
   UtilDIToken,
 } from '@/domain';
-import { CookieName } from '../constant';
-import { Auth, Guest, User, ValidSchema } from '../decorators';
-import { LoginBodySchema, RegisterBodySchema } from '../schemas';
+import { CookieName, ValidSchema } from '../shared';
+import { LoginBodySchema, RegisterBodySchema } from './schema';
+import { Auth, Guest, User } from './decorators';
 
 @Controller()
 export class AuthController {

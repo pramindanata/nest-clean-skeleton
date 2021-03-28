@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { ExecutionContext, Injectable } from '@nestjs/common';
-import { RequestPayloadSchema } from '../../interface';
+import { RequestPayloadSchema } from '../../shared';
 
 @Injectable()
 export class GetArticleListQuerySchema implements RequestPayloadSchema {
