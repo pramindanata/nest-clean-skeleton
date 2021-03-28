@@ -3,7 +3,7 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { RequestPayloadSchema } from '../../shared';
 
 @Injectable()
-export class LoginBodySchema implements RequestPayloadSchema {
+export class LoginSchema implements RequestPayloadSchema {
   async get(ctx: ExecutionContext, joi: Joi.Root): Promise<Joi.ObjectSchema> {
     return joi.object({
       email: joi

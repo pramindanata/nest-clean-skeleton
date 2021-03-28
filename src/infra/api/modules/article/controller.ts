@@ -14,9 +14,9 @@ import {
 import { ArticleUseCase, Paginator, User as UserEntity } from '@/domain';
 import { ParseStrIntPipe, ValidSchema } from '../shared';
 import {
-  CreateArticleBodySchema,
-  GetArticleListQuerySchema,
-  UpdateArticleBodySchema,
+  CreateArticleSchema,
+  GetArticlesSchema,
+  UpdateArticleSchema,
 } from './schema';
 import { Auth, User } from '../auth';
 
@@ -25,7 +25,7 @@ export class ArticleController {
   constructor(private articleUseCase: ArticleUseCase) {}
 
   @Get('/')
-  @ValidSchema({ query: GetArticleListQuerySchema })
+  @ValidSchema({ query: GetArticlesSchema })
   async index(@Query() query: IndexQuery): Promise<Paginator<any>> {
     const { order, page, search, sort } = query;
     const paginator = await this.articleUseCase.paginate({
@@ -41,7 +41,7 @@ export class ArticleController {
 
   @Post('/')
   @Auth()
-  @ValidSchema({ body: CreateArticleBodySchema })
+  @ValidSchema({ body: CreateArticleSchema })
   @HttpCode(HttpStatus.OK)
   async create(
     @Body() body: CreateBody,
@@ -71,7 +71,7 @@ export class ArticleController {
 
   @Put('/:id')
   @Auth()
-  @ValidSchema({ body: UpdateArticleBodySchema })
+  @ValidSchema({ body: UpdateArticleSchema })
   async update(
     @Body() body: UpdateBody,
     @Param('id', ParseStrIntPipe) id: string,

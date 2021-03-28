@@ -15,7 +15,7 @@ import {
   UtilDIToken,
 } from '@/domain';
 import { CookieName, ValidSchema } from '../shared';
-import { LoginBodySchema, RegisterBodySchema } from './schema';
+import { LoginSchema, RegisterSchema } from './schema';
 import { Auth, Guest, User } from './decorators';
 
 @Controller()
@@ -30,7 +30,7 @@ export class AuthController {
   @Post('/login')
   @Guest()
   @HttpCode(200)
-  @ValidSchema({ body: LoginBodySchema })
+  @ValidSchema({ body: LoginSchema })
   async login(@Body() body: LoginBody, @Res() res: Response): Promise<any> {
     const user = await this.userUseCase.login(body);
     const token = await this.jwtUtil.create({
@@ -45,7 +45,7 @@ export class AuthController {
   @Post('/register')
   @Guest()
   @HttpCode(200)
-  @ValidSchema({ body: RegisterBodySchema })
+  @ValidSchema({ body: RegisterSchema })
   async register(
     @Body() body: RegisterBody,
     @Res() res: Response,

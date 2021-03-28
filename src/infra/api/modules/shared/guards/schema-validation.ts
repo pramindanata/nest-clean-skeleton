@@ -32,19 +32,19 @@ export class SchemaValidationGuard implements CanActivate {
     );
 
     if (opts.params) {
-      const schema = await this.moduleRef.create(opts.params);
+      const schema = this.moduleRef.get(opts.params);
       const result = await this.validate(ctx, schema, params, 'params');
       req.params = result.value;
     }
 
     if (opts.query) {
-      const schema = await this.moduleRef.create(opts.query);
+      const schema = this.moduleRef.get(opts.query);
       const result = await this.validate(ctx, schema, query, 'query');
       req.query = result.value;
     }
 
     if (opts.body) {
-      const schema = await this.moduleRef.create(opts.body);
+      const schema = this.moduleRef.get(opts.body);
       const result = await this.validate(ctx, schema, body, 'body');
       req.body = result.value;
     }
