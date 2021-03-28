@@ -15,7 +15,7 @@ import {
   UtilDIToken,
 } from '@/domain';
 import { CookieName } from '../constant';
-import { User, ValidSchema } from '../decorators';
+import { Auth, Guest, User, ValidSchema } from '../decorators';
 import { LoginBodySchema, RegisterBodySchema } from '../schemas';
 
 @Controller()
@@ -28,6 +28,7 @@ export class AuthController {
   ) {}
 
   @Post('/login')
+  @Guest()
   @HttpCode(200)
   @ValidSchema({ body: LoginBodySchema })
   async login(@Body() body: LoginBody, @Res() res: Response): Promise<any> {
@@ -42,6 +43,7 @@ export class AuthController {
   }
 
   @Post('/register')
+  @Guest()
   @HttpCode(200)
   @ValidSchema({ body: RegisterBodySchema })
   async register(
@@ -59,6 +61,7 @@ export class AuthController {
   }
 
   @Get('/me')
+  @Auth()
   async me(@User() user: DomainUser): Promise<any> {
     return {
       data: user,
