@@ -3,3 +3,7 @@ export enum CookieName {
 }
 
 export type RequestPayloadSource = 'body' | 'params' | 'query';
+
+export enum MetadataKey {
+  SCHEMAS = 'schemas',
+}
