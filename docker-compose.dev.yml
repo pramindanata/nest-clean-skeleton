@@ -1,0 +1,39 @@
+version: '3'
+
+networks:
+  nest-clean-net:
+    driver: bridge
+
+volumes:
+  nest-clean-pg:
+    driver: local
+  nest-clean-redis:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=nest_clean
+      - TZ=UTC
+      - PGTZ=UTC
+    ports:
+      - 5432:5432
+    networks:
+      - nest-clean-net
+    volumes:
+      - nest-clean-pg:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6-alpine
+    command: [
+      '--appendonly', 'yes'
+    ]
+    ports:
+      - 6379:6379
+    networks:
+      - nest-clean-net
+    volumes:
+      - nest-clean-redis:/data
