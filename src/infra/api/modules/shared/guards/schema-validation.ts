@@ -20,16 +20,14 @@ export class SchemaValidationGuard implements CanActivate {
   async canActivate(ctx: ExecutionContext): Promise<boolean> {
     const req = ctx.switchToHttp().getRequest<Request>();
     const { body, query, params } = req;
-
-    /**
-     * Will create a new instance on each request.
-     * Use module provider and register it to `AppModule`
-     * to make it as singleton.
-     */
-    const opts = this.reflector.get<SchemaOptions>(
+    const opts = this.reflector.get<SchemaOptions | undefined>(
       MetadataKey.SCHEMAS,
       ctx.getHandler(),
     );
+
+    if (!opts) {
+      throw new Error('SchemaOptions is empty');
+    }
 
     if (opts.params) {
       const schema = this.moduleRef.get(opts.params);
