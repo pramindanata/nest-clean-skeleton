@@ -1,6 +1,6 @@
 {
   "name": "nest-clean-skeleton",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Nest.js skeleton with clean architecture approach.",
   "author": "pramindanata.eksa@gmail.com",
   "private": true,
