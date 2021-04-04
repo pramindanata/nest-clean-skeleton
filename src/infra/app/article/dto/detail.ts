@@ -1,15 +1,17 @@
 import { Article } from '@/domain';
-import { UserDTO, UserDTOProps } from '../user';
+import { UserDTO, UserDTOProps } from '../../user';
 
-export class ArticleCatalogDTO {
+export class ArticleDTO {
   id: string;
   title: string;
+  description: string;
   createdAt: string;
   author?: UserDTO;
 
-  constructor(props: ArticleCatalogDTOProps) {
+  constructor(props: ArticleDTOProps) {
     this.id = props.id;
     this.title = props.title;
+    this.description = props.description;
     this.createdAt = props.createdAt;
 
     if (props.author) {
@@ -17,19 +19,21 @@ export class ArticleCatalogDTO {
     }
   }
 
-  static fromDomain(domain: Article): ArticleCatalogDTO {
-    return new ArticleCatalogDTO({
+  static fromDomain(domain: Article): ArticleDTO {
+    return new ArticleDTO({
       id: domain.id,
       title: domain.title,
+      description: domain.description,
       createdAt: domain.createdAt.toISOString(),
       author: domain.author && UserDTO.fromDomain(domain.author),
     });
   }
 }
 
-export interface ArticleCatalogDTOProps {
+export interface ArticleDTOProps {
   id: string;
   title: string;
+  description: string;
   createdAt: string;
   author?: UserDTOProps;
 }

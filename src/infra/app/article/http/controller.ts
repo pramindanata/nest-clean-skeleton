@@ -19,9 +19,9 @@ import {
   Paginator,
   User as UserEntity,
 } from '@/domain';
-import { ArticleCatalogDTO, ArticleDTO } from '@/infra/dto';
 import { Ability, ParseStrIntPipe, ValidSchema } from '../../shared';
 import { Auth, User } from '../../auth';
+import { ArticleCatalogDTO, ArticleDTO } from '../dto';
 import {
   CreateArticleSchema,
   GetArticlesSchema,

@@ -8,10 +8,10 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
-import { User as UserEntity, UserUseCase, UtilDIToken } from '@/domain';
-import { UserDTO } from '@/infra/dto';
 import { JWTUtilContract } from '@/contracts';
+import { User as UserEntity, UserUseCase, UtilDIToken } from '@/domain';
 import { CookieName, ValidSchema } from '../../shared';
+import { UserDTO } from '../../user';
 import { LoginSchema, RegisterSchema } from './schema';
 import { Auth, Guest, User } from './decorators';
 
