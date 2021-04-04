@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ArticleRepositoryContract } from '@/domain/contracts';
+import { ArticleRepositoryContract } from '@/contracts';
 import { BasePaginateProps, Paginator, RepositoryDIToken } from '../shared';
 import { Article } from './entity';
 

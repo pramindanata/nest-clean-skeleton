@@ -1,11 +1,11 @@
 import { EntityRepository, AbstractRepository } from 'typeorm';
 import {
   Article,
-  ArticleRepositoryContract,
   CreateArticleProps,
   PaginateArticleProps,
   Paginator,
 } from '@/domain';
+import { ArticleRepositoryContract } from '@/contracts';
 import { ORMArticle, ORMArticleMapper } from '../entities';
 
 @EntityRepository(ORMArticle)

@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
-import { CryptUtilContract } from '@/domain';
+import { CryptUtilContract } from '@/contracts';
 
 @Injectable()
 export class CryptUtil implements CryptUtilContract {

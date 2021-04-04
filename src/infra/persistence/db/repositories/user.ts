@@ -1,5 +1,6 @@
 import { AbstractRepository, EntityRepository } from 'typeorm';
-import { CreateUserProps, User, UserRepositoryContract } from '@/domain';
+import { User } from '@/domain';
+import { CreateUserProps, UserRepositoryContract } from '@/contracts';
 import { ORMUser, ORMUserMapper } from '../entities';
 
 @EntityRepository(ORMUser)

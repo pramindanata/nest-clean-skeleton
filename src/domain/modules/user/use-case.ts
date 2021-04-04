@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CryptUtilContract, UserRepositoryContract } from '../../contracts';
+import { CryptUtilContract, UserRepositoryContract } from '@/contracts';
 import { RepositoryDIToken, UtilDIToken } from '../shared';
 import { User, UserRole } from './entity';
 import {

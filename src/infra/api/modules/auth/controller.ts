@@ -8,16 +8,12 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
-import {
-  JWTUtilContract,
-  User as UserEntity,
-  UserUseCase,
-  UtilDIToken,
-} from '@/domain';
+import { User as UserEntity, UserUseCase, UtilDIToken } from '@/domain';
 import { CookieName, ValidSchema } from '../shared';
+import { UserDTO } from '@/infra/dto';
+import { JWTUtilContract } from '@/contracts';
 import { LoginSchema, RegisterSchema } from './schema';
 import { Auth, Guest, User } from './decorators';
-import { UserDTO } from '@/infra/dto';
 
 @Controller()
 export class AuthController {

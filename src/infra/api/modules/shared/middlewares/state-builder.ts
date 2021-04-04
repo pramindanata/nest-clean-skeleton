@@ -1,3 +1,4 @@
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import {
   HttpStatus,
@@ -6,14 +7,8 @@ import {
   NestMiddleware,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import {
-  AbilityFactory,
-  JWTUtilContract,
-  User,
-  UserUseCase,
-  UtilDIToken,
-} from '@/domain';
+import { JWTUtilContract } from '@/contracts';
+import { AbilityFactory, User, UserUseCase, UtilDIToken } from '@/domain';
 import { CookieName } from '../constant';
 
 @Injectable()
