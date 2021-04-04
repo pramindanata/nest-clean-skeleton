@@ -3,7 +3,7 @@ import {
   CreateArticleProps,
   PaginateArticleProps,
   Paginator,
-} from '@/domain/modules';
+} from '@/domain';
 
 export interface ArticleRepositoryContract {
   paginate(props: PaginateArticleProps): Promise<Paginator<Article>>;

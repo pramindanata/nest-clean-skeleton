@@ -1,4 +1,4 @@
-import { User, UserRole } from '@/domain/modules';
+import { User, UserRole } from '@/domain';
 
 export interface UserRepositoryContract {
   create(props: CreateUserProps): Promise<User>;
