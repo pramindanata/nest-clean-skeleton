@@ -1,5 +1,5 @@
 declare namespace Express {
   interface Request {
-    state: import('../infra/api/modules/shared').State;
+    state: import('../infra/app').State;
   }
 }

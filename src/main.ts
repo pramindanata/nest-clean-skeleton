@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser';
 import { NestFactory } from '@nestjs/core';
-import { AppModule, AllExceptionFilter } from './infra/api';
+import { AppModule, AllExceptionFilter } from './infra/app';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
